@@ -148,7 +148,7 @@ export const Step3: FC<Props> = ({
                   />
                 </FormItem>
               </div>
-              <FormItem label="Hausnummer" errorMessage={errors.hausnummer}>
+              <FormItem label="Hausnummer">
                 <input
                   type="text"
                   className={`border border-solid ${
