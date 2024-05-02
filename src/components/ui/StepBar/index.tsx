@@ -24,7 +24,7 @@ export const StepBar: FC<Props> = ({ percent, step }) => {
           }}
         >
           <div
-            className={`${step === 3 || (step === 4 && "min-w-[200px] mr-10")}`}
+            className={`${(step === 3 || step === 4) && "min-w-[200px] mr-10"}`}
           >
             {step === 3
               ? `${percent}% - Fast geschafft!`
