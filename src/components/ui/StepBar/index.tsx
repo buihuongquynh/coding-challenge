@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { FC, useEffect, useState } from "react";
 import icon from "./assets/tick.png";
 
@@ -8,11 +9,11 @@ type Props = {
 
 export const StepBar: FC<Props> = ({ percent, step }) => {
   return (
-    <div className={`pt-10  ${step === 3 && "bg-[#000D19]"} pb-2 `}>
+    <div className={`pt-14 pl-3 pr-3 ${step === 3 && "bg-[#000D19]"} pb-5 `}>
       <div className="relative w-full bg-[#64D59F33] h-[4px] rounded-full ">
         <div
           className="absolute left-0 bg-[#02FF83] h-full rounded-full transition-width duration-1000"
-          style={{ width: `${percent}%` }}
+          style={{ width: `${percent - 5}%` }}
         />
         <div
           className={`${
@@ -22,7 +23,9 @@ export const StepBar: FC<Props> = ({ percent, step }) => {
             left: `${percent}%`,
           }}
         >
-          <div className={`${step === 3 && "min-w-[200px]"}`}>
+          <div
+            className={`${step === 3 || (step === 4 && "min-w-[200px] mr-10")}`}
+          >
             {step === 3
               ? `${percent}% - Fast geschafft!`
               : `${percent}% geschafft`}
@@ -31,7 +34,7 @@ export const StepBar: FC<Props> = ({ percent, step }) => {
         <div
           className={`absolute top-1/2 transform -translate-y-1/2 transition-left duration-1000`}
           style={{
-            left: `${percent}%`,
+            left: `${percent - 5}%`,
           }}
         >
           <img className="w-[20px] h-[20px]" src={icon.src} alt="Tick Icon" />

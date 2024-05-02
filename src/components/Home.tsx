@@ -2,11 +2,10 @@
 
 import {
   ChangeEvent,
-  ChangeEventHandler,
+  FocusEvent,
   FC,
   useCallback,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import { Step1 } from "./Step1";
@@ -15,6 +14,7 @@ import { Step3 } from "./Step3";
 import { BackButton } from "./ui/BackButton";
 import { SlideShow } from "./ui/SlideShow";
 import { StepBar } from "./ui/StepBar";
+import { Success } from "./Success";
 
 export type FormValue = {
   dachform: string;
@@ -48,7 +48,7 @@ export const Home: FC = () => {
   });
 
   const handleChangeDachform = useCallback((dachform: string) => {
-    setActiveSlide((prevStep) => (prevStep + 1) % slides.length);
+    setActiveSlide((prevStep) => (prevStep + 1) % 4);
 
     setFormData((prevData) => ({
       ...prevData,
@@ -57,7 +57,7 @@ export const Home: FC = () => {
   }, []);
 
   const handleDachfenster = useCallback((dachfenster: string) => {
-    setActiveSlide((prevStep) => (prevStep + 1) % slides.length);
+    setActiveSlide((prevStep) => (prevStep + 1) % 4);
 
     setFormData((prevData) => ({
       ...prevData,
@@ -66,19 +66,33 @@ export const Home: FC = () => {
   }, []);
 
   const [errors, setErrors] = useState({
-    username: "",
-    password: "",
+    name: "",
+    telefonnummer: "",
+    postleitzahl: "",
+    stadt: "",
+    strasse: "",
+    hausnummer: "",
   });
 
   const validateForm = (name: string, value: string) => {
     let errorMessage = "";
-    if (name === "name") {
-      if (value.trim() === "") {
-        errorMessage = "Username không được để trống";
+    if (!value.trim()) {
+      errorMessage = `Bitte Vor- und ${name} angeben`;
+    }
+
+    if (name === "postleitzahl") {
+      if (value.length < 4) {
+        errorMessage = "Diese Postleitzahl ist leider zu kurz";
       }
-    } else if (name === "password") {
-      if (value.trim() === "") {
-        errorMessage = "Password không được để trống";
+    }
+
+    if (name === "telefonnummer") {
+      const cleanedPhoneNumber = value.replace(/\s|-|\(|\)/g, "");
+      if (
+        !/^(\+49|0049)/.test(cleanedPhoneNumber) ||
+        !/^\+49\d{9,10}$/.test(cleanedPhoneNumber)
+      ) {
+        errorMessage = "ungültige telefonnummer";
       }
     }
     return errorMessage;
@@ -86,6 +100,11 @@ export const Home: FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
+    if (name === "postleitzahl" && value.length === 6) {
+      return;
+    }
+
     const errorMessage = validateForm(name, value);
 
     setFormData({
@@ -99,9 +118,36 @@ export const Home: FC = () => {
     });
   };
 
+  const handleBlur = useCallback(
+    (e: FocusEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      const errorMessage = validateForm(name, value);
+      setErrors({
+        ...errors,
+        [name]: errorMessage,
+      });
+    },
+    [errors]
+  );
+
+  const handleSubmit = useCallback(async () => {
+    try {
+      await fetch("https://65590262e93ca47020a9fce8.mockapi.io/insert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      setActiveSlide((prevStep) => (prevStep + 1) % 4);
+    } catch {
+      //Do nothing
+    }
+  }, [formData]);
+
   const slides = [
-    <Step1 onClick={handleChangeDachform} />,
-    <div>
+    <Step1 onClick={handleChangeDachform} key={1} />,
+    <div className="sm:px-[40px] px-[16px]" key={2}>
       <Step2 onClick={handleDachfenster} />
       <BackButton
         onClick={() =>
@@ -110,10 +156,14 @@ export const Home: FC = () => {
       />
     </div>,
     <Step3
-      isStep3Active={stepInfo.step === 3}
+      key={3}
       formData={formData}
+      errors={errors}
       onChange={handleChange}
+      onSubmit={handleSubmit}
+      onBlur={handleBlur}
     />,
+    <Success key={4} />,
   ];
 
   useEffect(() => {
@@ -132,14 +182,17 @@ export const Home: FC = () => {
         percent: 95,
         step: 3,
       });
+    } else if (activeSlide === 3) {
+      setStepInfo({
+        percent: 100,
+        step: 4,
+      });
     }
   }, [activeSlide]);
 
   return (
-    <div className="max-w-[930px] m-auto bg-[#FAFAFA]">
-      <div className="sm:px-[40px] px-[16px]">
-        <StepBar percent={stepInfo.percent} step={stepInfo.step} />
-      </div>
+    <div className="max-w-[930px] m-auto bg-[#FAFAFA] overflow-hidden sm:mt-20">
+      <StepBar percent={stepInfo.percent} step={stepInfo.step} />
       <SlideShow activeSlide={activeSlide} slides={slides} />
     </div>
   );
