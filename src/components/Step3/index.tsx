@@ -64,7 +64,7 @@ export const Step3: FC<Props> = ({
                     value="herr"
                     onChange={onChange}
                   />
-                  <p className="text-[#333333] font-normal">Herr</p>
+                  <p className="text-[#333333] font-thin">Herr</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -74,7 +74,7 @@ export const Step3: FC<Props> = ({
                     value="frau"
                     onChange={onChange}
                   />
-                  <p className="text-[#333333] font-normal">Frau</p>
+                  <p className="text-[#333333] font-thin">Frau</p>
                 </div>
               </div>
             </FormItem>
@@ -83,7 +83,7 @@ export const Step3: FC<Props> = ({
                 type="text"
                 className={`border border-solid ${
                   !!errors.name ? "border-[#CD4218]" : "border-gray-300"
-                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black`}
+                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black font-thin`}
                 placeholder="Vor- und Nachname"
                 value={formData.name}
                 onChange={onChange}
@@ -98,7 +98,7 @@ export const Step3: FC<Props> = ({
                   !!errors.telefonnummer
                     ? "border-[#CD4218]"
                     : "border-gray-300"
-                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black`}
+                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black font-thin`}
                 placeholder="+49 123 456 789"
                 value={formData.telefonnummer}
                 onChange={onChange}
@@ -111,7 +111,7 @@ export const Step3: FC<Props> = ({
                 type="number"
                 className={`border border-solid ${
                   !!errors.postleitzahl ? "border-[#CD4218]" : "border-gray-300"
-                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black`}
+                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black font-thin`}
                 placeholder="12277"
                 value={formData.postleitzahl}
                 onChange={onChange}
@@ -124,7 +124,7 @@ export const Step3: FC<Props> = ({
                 type="text"
                 className={`border border-solid ${
                   !!errors.stadt ? "border-[#CD4218]" : "border-gray-300"
-                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black`}
+                } sm:w-[410px] w-full h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black font-thin`}
                 placeholder="Berlin"
                 value={formData.stadt}
                 onChange={onChange}
@@ -139,7 +139,7 @@ export const Step3: FC<Props> = ({
                     type="text"
                     className={`border border-solid ${
                       !!errors.strasse ? "border-[#CD4218]" : "border-gray-300"
-                    }  h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black w-full`}
+                    }  h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black w-full font-thin`}
                     placeholder="Straße"
                     value={formData.strasse}
                     onChange={onChange}
@@ -153,7 +153,7 @@ export const Step3: FC<Props> = ({
                   type="text"
                   className={`border border-solid ${
                     !!errors.hausnummer ? "border-[#CD4218]" : "border-gray-300"
-                  }  h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black w-full`}
+                  }  h-[46px] rounded-[8px] text-[20px] text-[#4E4E4E] px-5 py-3 outline-black w-full font-thin`}
                   placeholder="Nr."
                   value={formData.hausnummer}
                   onChange={onChange}

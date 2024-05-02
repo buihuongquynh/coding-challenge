@@ -14,7 +14,7 @@ export const FormItem: FC<Props> = ({ children, label, errorMessage }) => {
       <div className="text-[#5F5F68] font-medium text-[14px]">
         {label}{" "}
         {!!errorMessage && (
-          <span className="text-[#CD4218] font-medium text-[11.4px]">
+          <span className="text-[#CD4218] font-thin text-[11.4px]">
             {errorMessage}
           </span>
         )}
