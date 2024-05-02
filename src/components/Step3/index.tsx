@@ -87,7 +87,7 @@ export const Step3: FC<Props> = ({
                 placeholder="Vor- und Nachname"
                 value={formData.name}
                 onChange={onChange}
-                onFocus={onBlur}
+                onBlur={onBlur}
                 name="name"
               />
             </FormItem>
@@ -102,7 +102,7 @@ export const Step3: FC<Props> = ({
                 placeholder="+49 123 456 789"
                 value={formData.telefonnummer}
                 onChange={onChange}
-                onFocus={onBlur}
+                onBlur={onBlur}
                 name="telefonnummer"
               />
             </FormItem>
@@ -115,7 +115,7 @@ export const Step3: FC<Props> = ({
                 placeholder="12277"
                 value={formData.postleitzahl}
                 onChange={onChange}
-                onFocus={onBlur}
+                onBlur={onBlur}
                 name="postleitzahl"
               />
             </FormItem>
@@ -128,7 +128,7 @@ export const Step3: FC<Props> = ({
                 placeholder="Berlin"
                 value={formData.stadt}
                 onChange={onChange}
-                onFocus={onBlur}
+                onBlur={onBlur}
                 name="stadt"
               />
             </FormItem>
@@ -143,7 +143,7 @@ export const Step3: FC<Props> = ({
                     placeholder="Straße"
                     value={formData.strasse}
                     onChange={onChange}
-                    onFocus={onBlur}
+                    onBlur={onBlur}
                     name="strasse"
                   />
                 </FormItem>
@@ -157,7 +157,7 @@ export const Step3: FC<Props> = ({
                   placeholder="Nr."
                   value={formData.hausnummer}
                   onChange={onChange}
-                  onFocus={onBlur}
+                  onBlur={onBlur}
                   name="hausnummer"
                 />
               </FormItem>
